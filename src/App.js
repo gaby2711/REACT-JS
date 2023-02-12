@@ -2,9 +2,11 @@ import './App.css';
 import {BrowserRouter, Routes, Route} from "react-router-dom"
 import ItemLisContainer from './componets/ItemListContainer/ItemListContainer';
 import Navbar from './componets/Navbar/Navbar';
-import Footer from './componets/Footer/Footer';
 import ItemDetailContainer from "./componets/ItemDetailContainer/ItemDetailContainer"
 import { CartProvider } from './componets/cartContext/cartContex';
+import Cart from './componets/Cart/Cart';
+
+
 
 function App() {
   return (
@@ -16,8 +18,8 @@ function App() {
             <Route path="/" element={<ItemLisContainer greeting={"Listado de productos"} />}/> 
             <Route path="/category/:categoryId" element={<ItemLisContainer />} /> 
             <Route path="/item/:productId" element={<ItemDetailContainer />} /> 
+            <Route path="/cart" element={<Cart />} /> 
           </Routes>
-          <Footer/>
         </BrowserRouter>
         </CartProvider>
     </div>

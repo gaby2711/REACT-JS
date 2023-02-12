@@ -15,17 +15,24 @@ const ItemDetailContainer = () => {
     }, [])
 
     useEffect(() => {
-        const docRef = doc(db, 'products', productId)
+        (async ()=>{
+        const productRef = doc(db, "products", productId)
+        
+        try{
 
-        getDoc(docRef).then(doc => {
-            const dataProduct = doc.data()
-            const productAdapted = { id: doc.id, ...dataProduct }
-            setProduct(productAdapted)
-        }).catch(error => {
-            console.log(error)
-        }).finally(() => {
+        
+        const snapshot = await getDoc(productRef)
+        
+        const fields = snapshot.data()
+        const productsAdapted = {id: snapshot.id, ...fields}
+            setProduct(productsAdapted)
+        } catch(error){
+            console.log(error);
+        }finally{
             setLoading(false)
-        })
+        }
+
+        })()
     }, [productId])
 
     if(loading) {

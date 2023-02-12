@@ -15,8 +15,8 @@ return (
     <nav className="NavBar" >
         <h3 onClick={() => navigate('/')}>My imports OM</h3>
         <div className="Categories">
-        <NavLink to={`/category/Hogar`} className={({ isActive }) => isActive ? 'ActiveOption' : 'Option'}>Hogar</NavLink>
-        <NavLink to={`/category/Ofertas`} className={({ isActive }) => isActive ? 'ActiveOption' : 'Option'}>Ofertas</NavLink>
+        <NavLink to={`/category/hogar`} className={({ isActive }) => isActive ? 'ActiveOption' : 'Option'}>Hogar</NavLink>
+        <NavLink to={`/category/ofertas`} className={({ isActive }) => isActive ? 'ActiveOption' : 'Option'}>Ofertas</NavLink>
         </div>
         <CartWidget totalQuantity={totalQuantity}/>
     </nav>

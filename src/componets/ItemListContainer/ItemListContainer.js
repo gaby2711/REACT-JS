@@ -1,50 +1,44 @@
 import { useState, useEffect } from 'react'
-import ItemList from '../ItemList/ItemList'
-import { getDocs, collection, query, where } from 'firebase/firestore'
+import Itemlist from "../ItemList/ItemList"
+import { getDocs, collection,} from 'firebase/firestore'
 import { db } from '../../firebase/firebase'
-
 import { useParams } from 'react-router-dom'
 
 const ItemListContainer = ({ greeting }) => {
-    const [products, setProducts] = useState([])
-    const [loading, setLoading] = useState(true)
+    const [products , setProducts] = useState([])
+    const [loading , setLoanding] = useState(true)
+    const {categoryId} = useParams ()
 
-    const { categoryId } = useParams()
+    useEffect(() =>{
+        (async()=>{
+        setLoanding(true)
 
-    useEffect(() => {
-        document.title = 'Todos los productos'
-    }, [])
+        const collectionRef = collection(db, "products")
+        try{
+            const response = await getDocs(collectionRef)
 
-    useEffect(() => {
-        setLoading(true)
-        
-        const collectionRef = categoryId 
-            ? query(collection(db, 'products'), where('category', '==', categoryId))
-            : collection(db, 'products')
+            const productsAdapted = response.docs.map(doc=>{
+                const fields = doc.data()
 
-        getDocs(collectionRef).then(response => {
-            const productsAdapted = response.docs.map(doc => {
-                const data = doc.data()
-                return { id: doc.id, ...data }
+                return {id: doc.id, ...fields}
             })
-
             setProducts(productsAdapted)
-        }).catch(error => {
-            console.log(error)
-        }).finally(() => {
-            setLoading(false)
-        })
-
+        }catch (error){
+            console.log(error);
+        }finally{
+            setLoanding(false)
+        }
+        })()
     }, [categoryId])
 
-    if(loading) {
+    if(loading){
         return <h1>Cargando productos...</h1>
     }
 
-    return (
-        <div className='ItemListContainer'>
-            <h1>{greeting}</h1>
-            <ItemList products={products} />
+    return(
+        <div className="ItemListContainer">
+            <h1>{categoryId ? `Estos nuestros productos de la categoria ${categoryId}`: `estos son nuestros productos`}</h1>
+            <Itemlist products={products} />
         </div>
     )
 }

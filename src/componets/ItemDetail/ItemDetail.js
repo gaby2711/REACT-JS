@@ -5,19 +5,16 @@ import { CartContext } from "../cartContext/cartContex"
 
 
 const ItemDetail = ({id, nombre, img,precio, category,stock}) =>{
-    const [quantity, setQuantity] = useState (0)
+    const [quantity, setQuantity] = useState(0)
 
-    const { addItem, isInCart } = useContext(CartContext)
+    const { addItem } = useContext(CartContext)
 
-    const handleOnAdd = (quantity) =>{
-        console.log(`Se agregaron al carrito ${quantity} ${nombre} con el id: ${id}`)
-        const productoAdd ={
-            id, nombre, precio, quantity
-        }
-        console.log(productoAdd);
-            setQuantity(quantity)
+    const handleOnAdd = (quantity) => {
+        console.log('agregue al carrito: ', quantity)
 
-            addItem({ id, nombre, precio, quantity})
+        setQuantity(parseInt(quantity))
+
+        addItem({ id, nombre, quantity, precio })
     }
 
     return(
@@ -27,13 +24,12 @@ const ItemDetail = ({id, nombre, img,precio, category,stock}) =>{
             <img src={img} alt={nombre} className="imagen-item"/>
             <p className="precio-item">${precio}</p>
             {
-                isInCart(id)  ?(
-                    <Link to='/cart'>Terminar Compra</Link>
-                ) :(
-                <ItemCount stock={stock} onAdd={handleOnAdd}/>
-                )
-            
-            }
+                    quantity > 0 ? (
+                        <Link to='/cart' className='Option'>Terminar compra</Link>
+                    ) : (
+                        <ItemCount stock={stock} onAdd={handleOnAdd} />
+                    )
+                }
             
         </div>
     )
