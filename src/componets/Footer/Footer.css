@@ -1,0 +1,38 @@
+
+
+footer {
+    background: linear-gradient(to left, #6f00ff, #0008ff);
+
+}
+
+footer .redes ul{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    list-style: none;
+}
+
+
+footer .redes li {
+    margin: 5px;
+    list-style: none;
+}
+
+footer .redes a {
+    padding: 1px;
+}
+
+footer .redes img {
+    height: 40px;
+    width: 40px;
+    margin: 9px;
+}
+
+footer .creado {
+    text-align: center;
+}
+
+footer .creado p {
+    color: #000000;
+    font-size: 20px;
+}

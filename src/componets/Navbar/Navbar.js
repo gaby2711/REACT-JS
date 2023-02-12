@@ -1,4 +1,5 @@
 import { NavLink,  } from 'react-router-dom'
+import "./Navbar.css"
 import CartWidget from '../Cartwidget/CartWidget'
 import { useNavigate } from 'react-router-dom'
 import { CartContext } from "../cartContext/cartContex"
