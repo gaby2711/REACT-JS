@@ -5,6 +5,7 @@ import Navbar from './componets/Navbar/Navbar';
 import ItemDetailContainer from "./componets/ItemDetailContainer/ItemDetailContainer"
 import { CartProvider } from './componets/cartContext/cartContex';
 import Cart from './componets/Cart/Cart';
+import Checkout from './componets/Checkout/Checkout';
 
 
 
@@ -15,10 +16,11 @@ function App() {
         <BrowserRouter>
         <Navbar/>
           <Routes>
-            <Route path="/" element={<ItemLisContainer greeting={"Listado de productos"} />}/> 
+            <Route path="/" element={<ItemLisContainer />}/> 
             <Route path="/category/:categoryId" element={<ItemLisContainer />} /> 
             <Route path="/item/:productId" element={<ItemDetailContainer />} /> 
             <Route path="/cart" element={<Cart />} /> 
+            <Route path="/checkout" element={<Checkout />} /> 
           </Routes>
         </BrowserRouter>
         </CartProvider>

@@ -4,7 +4,7 @@ import { getDocs, collection,} from 'firebase/firestore'
 import { db } from '../../firebase/firebase'
 import { useParams } from 'react-router-dom'
 
-const ItemListContainer = ({ greeting }) => {
+const ItemListContainer = () => {
     const [products , setProducts] = useState([])
     const [loading , setLoanding] = useState(true)
     const {categoryId} = useParams ()
