@@ -9,6 +9,9 @@ const Checkout = () => {
     const [loading, setLoading] = useState(false)
     const [orderId, setOrderId] = useState('')
     const { cart, total, clearCart } = useContext(CartContext)
+    const [nombre, setNombre] = useState ("")
+    const [phone, setPhone] =useState ("")
+    const [email, setEmail] = useState ("")
 
     const navigate = useNavigate()
 
@@ -17,9 +20,9 @@ const Checkout = () => {
         try {
             const objOrder = {
                 buyer: {
-                    name: 'Sebastian Zuviria',
-                    phone: '123456789',
-                    email: 'contact@sebaz.io'
+                    name: nombre,
+                    phone: phone,
+                    email:email
                 },
                 items: cart,
                 total
@@ -80,7 +83,7 @@ const Checkout = () => {
 
 
     }
-
+    
     if(loading) {
         return <h1>Generando orden...</h1>
     }
@@ -93,17 +96,30 @@ const Checkout = () => {
         )
     }
 
-    if(cart.length === 0) {
-        return (
-            <h1>No hay productos en el carrito</h1>
-        )
-    }
+   
 
     return (
-        <div>
-            <h1>Checkout</h1>
-            <button onClick={createOrder}>Generar orden</button>
+        <div >
+            <h1 className="d-flex justify-content-center">Checkout</h1>
+            
+        <form className="container" onSubmit={createOrder}>
+            <div className="row row-cols-1">
+              <div className="col p-2 d-flex justify-content-center">
+                <input type="text"  onChange={(e) => setNombre(e.target.value)} placeholder="Nombre" required/>
+            </div>
+            <div className="col p-2 d-flex justify-content-center">
+                <input type="text" onChange={(e) => setPhone(e.target.value)} placeholder="phone" required/>
+            </div>
+            <div className="col p-2 d-flex justify-content-center">
+                <input type="text"  onChange={(e) => setEmail(e.target.value)} placeholder="Email" required/>
+            </div>
+          
+             <button className="btn d-flex justify-content-center">Generar orden</button>
         </div>
+      </form>
+           
+        </div>
+        
     )
 }
 
